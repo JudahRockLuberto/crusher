@@ -109,7 +109,7 @@ class GalaxyMap(object):
         # Externally provided galaxy information
         self.aper_force = aper_force
 
-        # Placeholder for results
+        # Placeholder for possible results
         # Basic information
         self.detect_gal = None
         self.detect_ins = None
