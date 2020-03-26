@@ -261,7 +261,7 @@ class BeneMassAgeZMaps(object):
             maps['mass_exs'] = mass_exs
             maps['mass_gal'] = mass_gal
             
-        else:'
+        else:
             print('Note: map_star_rho_insitu and map_star_rho_exsitu not in file. Stellar mass maps skipped.')
 
             
@@ -280,6 +280,8 @@ class BeneMassAgeZMaps(object):
             maps['age_ins'] = age_ins
             maps['age_exs'] = age_exs
             maps['age_gal'] = age_gal
+        else:
+            print('map_star_age_insitu and map_star_age_exsitu not in file. Stellar age maps skipped.')
                                                                                    
 
         # Get the stellar metallicity map if there
@@ -299,6 +301,8 @@ class BeneMassAgeZMaps(object):
            maps['met_ins'] = met_ins
            maps['met_exs'] = met_exs
            maps['met_gal'] = met_gal
+        else:
+            print('map_star_metallicity_insitu and map_star_metallicity_exsitu not in file. Metallicity maps skipped.')
                 
         if maps_only:
             return maps
