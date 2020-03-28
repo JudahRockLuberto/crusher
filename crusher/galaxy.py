@@ -584,7 +584,8 @@ class GalaxyMap(object):
             return ell_shape_new, ell_mprof_new, bin_shape, bin_mprof
 
     def show_maps(self, figsize=(15, 15), savefig=False, dpi=100):
-        """Visualize the stellar mass, age, and metallicity maps for all components.
+        """Visualize the stellar mass, age, and/or metallicity maps for all components.
+        visual.show_maps takes in if have all values and changes figure accordingly
 
         Parameters
         ----------
@@ -600,10 +601,13 @@ class GalaxyMap(object):
         if self.detect_gal is None:
             self.detect('gal')
 
-        # Generate the figure
+        # Generate the figure, assuming logms exists (note: also assumes have mass profile -- why else make maps if don't?)
+        
         map_fig = visual.show_maps(
-            self.maps, self.detect_gal, figsize=figsize,
-            cid=self.info['catsh_id'], logms=self.info['logms'])
+            self.maps, self.detect_gal, 
+            age='map_star_age_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            met='map_star_metallicity_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            figsize=figsize, cid=self.info['catsh_id'], logms=self.info['logms'])
 
         # Save the figure in PNG format if necessary
         if savefig:
@@ -614,8 +618,9 @@ class GalaxyMap(object):
             return map_fig
 
     def show_aper(self, figsize=(8, 18), savefig=False, dpi=100, rad_min=5.5, rad_max=None):
-        """Visualize the stellar mass, age, and metallicity aperture profiles
-        for all components.
+        """Visualize the stellar mass, age, and/or metallicity aperture profiles.
+        for all components. visual.show_aper changes profile depending on if have
+        age or metallicity or not.
 
         Parameters
         ----------
@@ -641,7 +646,10 @@ class GalaxyMap(object):
 
         # Generate the figure
         aper_fig = visual.show_aper(
-            self.info, self.aper_sum, figsize=figsize, rad_min=rad_min, rad_max=rad_max)
+            self.info, self.aper_sum, 
+            age='map_star_age_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            met='map_star_metallicity_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            figsize=figsize, rad_min=rad_min, rad_max=rad_max)
 
         # Save the figure in PNG format if necessary
         if savefig:
