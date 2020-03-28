@@ -14,7 +14,7 @@ from matplotlib.colors import Normalize
 
 from kungpao.display import display_single
 
-from riker.data import Z_SUN
+from crusher.data import Z_SUN
 
 plt.rc('text', usetex=True)
 rcParams.update({'axes.linewidth': 1.5})
