@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 
 from astropy.table import Table, Column, join
 
-from riker import utils
-from riker import config
-from riker import visual
-from riker import profile
+from crusher import utils
+from crusher import config
+from crusher import visual
+from crusher import profile
 
 warnings.filterwarnings("ignore")
 
