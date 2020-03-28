@@ -51,7 +51,7 @@ IMG_CMAP = plt.get_cmap('Greys')
 IMG_CMAP.set_bad(color='w')
 
 
-def show_maps(maps, aper, cid=None, logms=None, figsize=(15, 15)):
+def show_maps(maps, aper, age=True, met=True cid=None, logms=None, figsize=(15, 15)):
     """Visualize the stellar mass, age, and metallicity maps.
 
     Parameters
@@ -71,7 +71,8 @@ def show_maps(maps, aper, cid=None, logms=None, figsize=(15, 15)):
     """
     # Setup the figure and grid of axes
     fig_sum = plt.figure(figsize=figsize, constrained_layout=False)
-    grid_sum = fig_sum.add_gridspec(3, 3, wspace=0.0, hspace=0.0)
+    # add rows based on if age or met is True (hence 1+age+met)
+    grid_sum = fig_sum.add_gridspec(1+age+met, 3, wspace=0.0, hspace=0.0)
     fig_sum.subplots_adjust(
         left=0.005, right=0.995, bottom=0.005, top=0.995,
         wspace=0.00, hspace=0.00)
@@ -124,7 +125,8 @@ def show_maps(maps, aper, cid=None, logms=None, figsize=(15, 15)):
             if ii == 2:
                 ax.text(0.75, 0.06, r'$\rm Ex\ situ$', fontsize=25,
                         transform=ax.transAxes)
-        if 'age' in name:
+        # skip over if not age's turn yet or if age not here
+        if 'age' in name and age is True:
             if ii % 3 == 0:
                 _ = display_single(
                     maps[name], ax=ax, stretch='linear', zmin=1.0, zmax=8.5,
@@ -139,7 +141,8 @@ def show_maps(maps, aper, cid=None, logms=None, figsize=(15, 15)):
                     maps[name], ax=ax, stretch='linear', zmin=1.0, zmax=8.5,
                     color_bar=False, scale_bar=False, no_negative=True,
                     cmap=IMG_CMAP, color_bar_color='k')
-        if 'met' in name:
+        # skip over if not met's turn yet or if met not here
+        if 'met' in name and met is True:
             if ii % 3 == 0:
                 _ = display_single(
                     maps[name] / Z_SUN, ax=ax, stretch='log10', zmin=-0.6, zmax=0.9,
@@ -158,7 +161,7 @@ def show_maps(maps, aper, cid=None, logms=None, figsize=(15, 15)):
     return fig_sum
 
 
-def show_aper(info, aper, figsize=(8, 18), rad_min=5.5, rad_max=170.):
+def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_max=170.):
     """Make a summary plot of the aperture measurements.
 
     Parameters
@@ -185,7 +188,8 @@ def show_aper(info, aper, figsize=(8, 18), rad_min=5.5, rad_max=170.):
 
     # Setup the figure
     fig_prof = plt.figure(figsize=figsize, constrained_layout=False)
-    grid_prof = fig_prof.add_gridspec(4, 1, wspace=0.0, hspace=0.0)
+    # add rows based on if age or met are True, or, 1 (why did 2+age+met)
+    grid_prof = fig_prof.add_gridspec(2+age+met, 1, wspace=0.0, hspace=0.0)
     fig_prof.subplots_adjust(
         left=0.175, right=0.93, bottom=0.055, top=0.995,
         wspace=0.00, hspace=0.00)
@@ -257,69 +261,71 @@ def show_aper(info, aper, figsize=(8, 18), rad_min=5.5, rad_max=170.):
     ax1_b.legend(fontsize=22, loc='best')
 
     # Metallicity profiles
-    ax2 = fig_prof.add_subplot(grid_prof[2])
-    ax2.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['met_gal_w'] / Z_SUN),
-        c='darkgrey', marker='s', s=60, label='__no_label__')
-    ax2.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['met_ins_w'] / Z_SUN),
-        c='orangered', marker='o', s=70, alpha=0.8, label='__no_label__')
-    ax2.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['met_exs_w'] / Z_SUN),
-        c='steelblue', marker='h', s=80, alpha=0.8, label='__no_label__')
-    ax2.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['met_ins'] / Z_SUN),
-        edgecolor='orangered', marker='o', s=80, alpha=0.8, label='__no_label__',
-        facecolor='none', linewidth=2)
-    ax2.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['met_exs'] / Z_SUN),
-        edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
-        facecolor='none', linewidth=2)
-    ax2.axhline(logz, linewidth=2.5, linestyle='--', alpha=0.8, c='k',
-                label=r'$\rm Catalog\ value$')
+    if met is True: 
+        ax2 = fig_prof.add_subplot(grid_prof[2])
+        ax2.scatter(
+            aper['rad_mid'] ** 0.25, np.log10(aper['met_gal_w'] / Z_SUN),
+            c='darkgrey', marker='s', s=60, label='__no_label__')
+        ax2.scatter(
+            aper['rad_mid'] ** 0.25, np.log10(aper['met_ins_w'] / Z_SUN),
+            c='orangered', marker='o', s=70, alpha=0.8, label='__no_label__')
+        ax2.scatter(
+            aper['rad_mid'] ** 0.25, np.log10(aper['met_exs_w'] / Z_SUN),
+            c='steelblue', marker='h', s=80, alpha=0.8, label='__no_label__')
+        ax2.scatter(
+            aper['rad_mid'] ** 0.25, np.log10(aper['met_ins'] / Z_SUN),
+            edgecolor='orangered', marker='o', s=80, alpha=0.8, label='__no_label__',
+            facecolor='none', linewidth=2)
+        ax2.scatter(
+            aper['rad_mid'] ** 0.25, np.log10(aper['met_exs'] / Z_SUN),
+            edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
+            facecolor='none', linewidth=2)
+        ax2.axhline(logz, linewidth=2.5, linestyle='--', alpha=0.8, c='k',
+                    label=r'$\rm Catalog\ value$')
 
-    ax2.grid(linestyle='--', alpha=0.5)
-    ax2.legend(fontsize=22, loc='best')
+        ax2.grid(linestyle='--', alpha=0.5)
+        ax2.legend(fontsize=22, loc='best')
 
-    _ = ax2.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
-    met_arr = np.stack(
-        [np.log10(aper['met_ins_w'][rad_mask] / Z_SUN),
-         np.log10(aper['met_exs_w'][rad_mask] / Z_SUN)])
-    _ = ax2.set_ylim(np.nanmin(met_arr) - 0.15, np.nanmax(met_arr) + 0.09)
-    _ = ax2.set_ylabel(r'$\log [Z_{\star}/Z_{\odot}]$', fontsize=28)
+        _ = ax2.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
+        met_arr = np.stack(
+            [np.log10(aper['met_ins_w'][rad_mask] / Z_SUN),
+             np.log10(aper['met_exs_w'][rad_mask] / Z_SUN)])
+        _ = ax2.set_ylim(np.nanmin(met_arr) - 0.15, np.nanmax(met_arr) + 0.09)
+        _ = ax2.set_ylabel(r'$\log [Z_{\star}/Z_{\odot}]$', fontsize=28)
 
     # Age profiles
-    ax3 = fig_prof.add_subplot(grid_prof[3])
-    ax3.scatter(
-        aper['rad_mid'] ** 0.25, aper['age_gal_w'],
-        c='darkgrey', marker='s', s=60, label='__no_label__')
-    ax3.scatter(
-        aper['rad_mid'] ** 0.25, aper['age_ins_w'],
-        c='orangered', marker='o', s=70, alpha=0.8, label=r'$\rm Weighted$')
-    ax3.scatter(
-        aper['rad_mid'] ** 0.25, aper['age_exs_w'],
-        c='steelblue', marker='h', s=80, alpha=0.8, label='__no_label__')
-    ax3.scatter(
-        aper['rad_mid'] ** 0.25, aper['age_ins'],
-        edgecolor='orangered', marker='o', s=80, alpha=0.8, label=r'$\rm Not\ Weighted$',
-        facecolor='none', linewidth=2)
-    ax3.scatter(
-        aper['rad_mid'] ** 0.25, aper['age_exs'],
-        edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
-        facecolor='none', linewidth=2)
-    ax3.axhline(age, linewidth=2.5, linestyle='--', alpha=0.8, c='k',
-                label=r'__no_label__')
+    if age is True:
+        ax3 = fig_prof.add_subplot(grid_prof[3])
+        ax3.scatter(
+            aper['rad_mid'] ** 0.25, aper['age_gal_w'],
+            c='darkgrey', marker='s', s=60, label='__no_label__')
+        ax3.scatter(
+            aper['rad_mid'] ** 0.25, aper['age_ins_w'],
+            c='orangered', marker='o', s=70, alpha=0.8, label=r'$\rm Weighted$')
+        ax3.scatter(
+            aper['rad_mid'] ** 0.25, aper['age_exs_w'],
+            c='steelblue', marker='h', s=80, alpha=0.8, label='__no_label__')
+        ax3.scatter(
+            aper['rad_mid'] ** 0.25, aper['age_ins'],
+            edgecolor='orangered', marker='o', s=80, alpha=0.8, label=r'$\rm Not\ Weighted$',
+            facecolor='none', linewidth=2)
+        ax3.scatter(
+            aper['rad_mid'] ** 0.25, aper['age_exs'],
+            edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
+            facecolor='none', linewidth=2)
+        ax3.axhline(age, linewidth=2.5, linestyle='--', alpha=0.8, c='k',
+                    label=r'__no_label__')
 
-    ax3.grid(linestyle='--', alpha=0.5)
-    ax3.legend(fontsize=20, loc='best')
+        ax3.grid(linestyle='--', alpha=0.5)
+        ax3.legend(fontsize=20, loc='best')
 
-    _ = ax3.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
-    age_arr = np.stack(
-        [aper['age_ins_w'][rad_mask], aper['age_exs_w'][rad_mask]])
-    _ = ax3.set_ylim(np.nanmin(age_arr) * 0.8, np.nanmax(age_arr) + 1.5)
+        _ = ax3.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
+        age_arr = np.stack(
+            [aper['age_ins_w'][rad_mask], aper['age_exs_w'][rad_mask]])
+        _ = ax3.set_ylim(np.nanmin(age_arr) * 0.8, np.nanmax(age_arr) + 1.5)
 
-    _ = ax3.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
-    _ = ax3.set_ylabel(r'$[\rm Age/Gyrs]$', fontsize=28)
+        _ = ax3.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
+        _ = ax3.set_ylabel(r'$[\rm Age/Gyrs]$', fontsize=28)
 
     return fig_prof
 
