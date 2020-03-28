@@ -13,7 +13,7 @@ from astropy.table import Table, Column
 import kungpao
 from kungpao.sbp import galSBP
 
-from riker import utils
+from crusher import utils
 
 __all__ = [
     'detect_galaxy',
