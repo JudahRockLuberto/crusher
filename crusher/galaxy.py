@@ -77,6 +77,9 @@ class GalaxyMap(object):
         if not os.path.isdir(self.sum_dir):
             os.mkdir(self.sum_dir)
 
+        # list of attributes
+        self.hdf5_list = list(hdf5)
+            
         # Pixel scale in unit of kpc per pixel
         self.pix = hdf5.pix
 
@@ -383,7 +386,7 @@ class GalaxyMap(object):
 
         
         # aperture mass profiles if there and add to aper_sum table
-        if 'map_star_rho_insitu_{}'.format(self.proj) in hdf5.hdf5_values and 'map_star_rho_exsitu_{}'.format(self.proj) in hdf5.hdf5_values:
+        if 'map_star_rho_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_rho_exsitu_{}'.format(self.proj) in self.hdf5_values:
             self.maper('gal')
             
             aper_sum.add_column(Column(data=self.maper_gal, name='maper_gal'))
@@ -398,7 +401,7 @@ class GalaxyMap(object):
             print('Data for map_star_rho_insitu and map_star_rho_exsitu is not in the file. Skipped.')
 
         # aperture age profiles if there and add to aper_sum table
-        if 'map_star_age_insitu_{}'.format(self.proj) in hdf5.hdf5_values and 'map_star_age_exsitu_{}'.format(self.proj) in hdf5.hdf5_values:
+        if 'map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_age_exsitu_{}'.format(self.proj) in self.hdf5_values:
             self.aprof('age', 'gal', return_mass=True)
             
             aper_sum.add_column(Column(data=self.age_prof_gal['prof_w'], name='age_gal_w'))
@@ -422,7 +425,7 @@ class GalaxyMap(object):
             print('map_star_age_insitu and map_star_age_insitu were not in file. Skipped.')
 
         # Aperture metallicity profiles if there and add to aper_sum table
-        if 'map_star_metallicity_insitu_{}'.format(self.proj) in hdf5.hdf5_values and 'map_star_metallicity_exsitu_{}'.format(self.proj) in hdf5.hdf5_values:
+        if 'map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_metallicity_exsitu_{}'.format(self.proj) in self.hdf5_values:
             self.aprof('met', 'gal')
             
             aper_sum.add_column(Column(data=self.met_prof_gal['prof_w'], name='met_gal_w'))
@@ -605,8 +608,8 @@ class GalaxyMap(object):
         
         map_fig = visual.show_maps(
             self.maps, self.detect_gal, 
-            age='map_star_age_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
-            met='map_star_metallicity_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            age='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
+            met='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
             figsize=figsize, cid=self.info['catsh_id'], logms=self.info['logms'])
 
         # Save the figure in PNG format if necessary
@@ -647,8 +650,8 @@ class GalaxyMap(object):
         # Generate the figure
         aper_fig = visual.show_aper(
             self.info, self.aper_sum, 
-            age='map_star_age_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
-            met='map_star_metallicity_insitu_{}'.format(self.proj) in hdf5.hdf5_values,
+            age='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
+            met='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
             figsize=figsize, rad_min=rad_min, rad_max=rad_max)
 
         # Save the figure in PNG format if necessary
