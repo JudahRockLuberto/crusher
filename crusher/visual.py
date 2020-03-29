@@ -51,7 +51,7 @@ IMG_CMAP = plt.get_cmap('Greys')
 IMG_CMAP.set_bad(color='w')
 
 
-def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15, 15)):
+def show_maps(maps, aper, age_info=True, met_info=True, cid=None, logms=None, figsize=(15, 15)):
     """Visualize the stellar mass, age, and metallicity maps.
 
     Parameters
@@ -72,7 +72,7 @@ def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15,
     # Setup the figure and grid of axes
     fig_sum = plt.figure(figsize=figsize, constrained_layout=False)
     # add rows based on if age or met is True (hence 1+age+met)
-    grid_sum = fig_sum.add_gridspec(1+age+met, 3, wspace=0.0, hspace=0.0)
+    grid_sum = fig_sum.add_gridspec(1+age_info+met_info, 3, wspace=0.0, hspace=0.0)
     fig_sum.subplots_adjust(
         left=0.005, right=0.995, bottom=0.005, top=0.995,
         wspace=0.00, hspace=0.00)
@@ -126,7 +126,7 @@ def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15,
                 ax.text(0.75, 0.06, r'$\rm Ex\ situ$', fontsize=25,
                         transform=ax.transAxes)
         # skip over if not age's turn yet or if age not here
-        if 'age' in name and age is True:
+        if 'age' in name and age_info is True:
             if ii % 3 == 0:
                 _ = display_single(
                     maps[name], ax=ax, stretch='linear', zmin=1.0, zmax=8.5,
@@ -142,7 +142,7 @@ def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15,
                     color_bar=False, scale_bar=False, no_negative=True,
                     cmap=IMG_CMAP, color_bar_color='k')
         # skip over if not met's turn yet or if met not here
-        if 'met' in name and met is True:
+        if 'met' in name and met_info is True:
             if ii % 3 == 0:
                 _ = display_single(
                     maps[name] / Z_SUN, ax=ax, stretch='log10', zmin=-0.6, zmax=0.9,
