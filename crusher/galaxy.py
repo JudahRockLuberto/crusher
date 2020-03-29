@@ -661,8 +661,8 @@ class GalaxyMap(object):
             plt.close(aper_fig)
         else:
             return aper_fig
-
-     def show_prof(self, savefig=False, dpi=100, z_min=3.5, z_max=10.5,
+        
+    def show_prof(self, savefig=False, dpi=100, z_min=3.5, z_max=10.5,
                   r_min=3.0, r_max=None, combine=False, insitu=False,
                   exsitu=False):
         """Visualize the 1-D Ellipse profiles of all components.
