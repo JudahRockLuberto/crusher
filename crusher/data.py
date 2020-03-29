@@ -33,9 +33,7 @@ class BeneMassAgeZMaps(object):
     """
 
     def __init__(self, hdf5_file, label=None):
-        ##
         # read in the file itself
-        #
         self.hdf5_file = hdf5_file
         directory, file_name = os.path.split(hdf5_file)
         self.dir = directory
@@ -44,9 +42,7 @@ class BeneMassAgeZMaps(object):
         # open and read in the file
         self.data = h5py.File(self.hdf5_file, 'r')
         
-        ##
-        # grab or differentiate useful information
-        #
+        # grab or differentiate useful information.
         # keys for available data
         self.keys = list(self.data.keys())
         
@@ -55,7 +51,7 @@ class BeneMassAgeZMaps(object):
         self.config_keys = [key for key in self.config_maps.attrs.keys()]
         
         #array of all values in file
-        self.hdf5_values = list(hdf5)
+        self.hdf5_values = list(self.data)
 
         # redshift of the snapshot
         self.redshift = self.get_config_key('snap_z')
