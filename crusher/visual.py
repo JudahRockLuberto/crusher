@@ -161,7 +161,7 @@ def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15,
     return fig_sum
 
 
-def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_max=170.):
+def show_aper(info, aper, age_info=True, met_info=True, figsize=(8, 18), rad_min=5.5, rad_max=170.):
     """Make a summary plot of the aperture measurements.
 
     Parameters
@@ -180,8 +180,10 @@ def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_
 
     """
     # Integrated properties of the galaxy
-    logms, age = info['logms'], info['age']
-    logz = np.log10(info['metallicity'] / Z_SUN)
+    logms = info['logms']
+    if age is True and met is True:
+        age = info['age']
+        logz = np.log10(info['metallicity'] / Z_SUN)
 
     # Radial mask
     rad_mask = aper['rad_mid'] >= rad_min
@@ -189,7 +191,7 @@ def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_
     # Setup the figure
     fig_prof = plt.figure(figsize=figsize, constrained_layout=False)
     # add rows based on if age or met are True, or, 1 (why did 2+age+met)
-    grid_prof = fig_prof.add_gridspec(2+age+met, 1, wspace=0.0, hspace=0.0)
+    grid_prof = fig_prof.add_gridspec(2+age_info+met_info, 1, wspace=0.0, hspace=0.0)
     fig_prof.subplots_adjust(
         left=0.175, right=0.93, bottom=0.055, top=0.995,
         wspace=0.00, hspace=0.00)
@@ -261,7 +263,7 @@ def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_
     ax1_b.legend(fontsize=22, loc='best')
 
     # Metallicity profiles
-    if met is True: 
+    if met_info is True: 
         ax2 = fig_prof.add_subplot(grid_prof[2])
         ax2.scatter(
             aper['rad_mid'] ** 0.25, np.log10(aper['met_gal_w'] / Z_SUN),
@@ -294,7 +296,7 @@ def show_aper(info, aper, age=True, met=True, figsize=(8, 18), rad_min=5.5, rad_
         _ = ax2.set_ylabel(r'$\log [Z_{\star}/Z_{\odot}]$', fontsize=28)
 
     # Age profiles
-    if age is True:
+    if age_info is True:
         ax3 = fig_prof.add_subplot(grid_prof[3])
         ax3.scatter(
             aper['rad_mid'] ** 0.25, aper['age_gal_w'],
