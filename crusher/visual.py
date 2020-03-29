@@ -181,7 +181,7 @@ def show_aper(info, aper, age_info=True, met_info=True, figsize=(8, 18), rad_min
     """
     # Integrated properties of the galaxy
     logms = info['logms']
-    if age is True and met is True:
+    if age_info is True and met_info is True:
         age = info['age']
         logz = np.log10(info['metallicity'] / Z_SUN)
 
