@@ -51,7 +51,7 @@ IMG_CMAP = plt.get_cmap('Greys')
 IMG_CMAP.set_bad(color='w')
 
 
-def show_maps(maps, aper, age=True, met=True cid=None, logms=None, figsize=(15, 15)):
+def show_maps(maps, aper, age=True, met=True, cid=None, logms=None, figsize=(15, 15)):
     """Visualize the stellar mass, age, and metallicity maps.
 
     Parameters
