@@ -773,8 +773,10 @@ def plot_ell_fourier(fourier, pix=1.0, r_min=6.0, r_max=190.0, show_both=False):
     return fig
 
 
-def plot_combined_maps(ell_array, distances=None, r_min=3.0, r_max=190.0):
-    """Plot combined maps of all centals, satellites, all
+def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, r_max=190.0):
+    """Plot combined maps of all centals, satellites, all. If is_primaries == None,
+    then plot color depending on distance to central. If is_primaries is given, 
+    plot centrals and black and satellites as red
 
     Parameters
     ----------
@@ -787,7 +789,7 @@ def plot_combined_maps(ell_array, distances=None, r_min=3.0, r_max=190.0):
 
     """
 
-    #before we start plotting, lets normalize the distance array
+    # before we start, let's normalize the distance array
     if distances is not None:
         distance_norm = list()
         for i in distances:
@@ -815,23 +817,49 @@ def plot_combined_maps(ell_array, distances=None, r_min=3.0, r_max=190.0):
     ax1.grid(linestyle='--', alpha=0.4, linewidth=2)
 
     # 1-D profiles
-    for i in range(len(ell_array)):
-        if ell_array[i]['ell_gal_3'] is not None:
-            ax1.errorbar(
-                ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
-                np.log10(ell_array[i]['ell_gal_3']['intens']),
-                yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
-                color='darkgrey', alpha=0.8, fmt='s', capsize=3,
-                capthick=1, elinewidth=1)
+    if is_primaries is None:
+        for i in range(len(ell_array)):
+            if ell_array[i]['ell_gal_3'] is not None:
+                ax1.errorbar(
+                    ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                    np.log10(ell_array[i]['ell_gal_3']['intens']),
+                    yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
+                    color='darkgrey', alpha=0.8, fmt='s', capsize=3,
+                    capthick=1, elinewidth=1)
 
-            #also making a scatterplot inside the errorbar for distances
-            if distances is not None:
-                ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
-                    np.log10(ell_array[i]['ell_gal_3']['intens']), c=cm.viridis_r(distance_norm[i]))
+                #also making a scatterplot inside the errorbar for distances
+                if distances is not None:
+                    ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                        np.log10(ell_array[i]['ell_gal_3']['intens']), c=cm.viridis_r(distance_norm[i]))
 
-    if distances is not None:
-        distance_colorbar = fig.colorbar(cm.ScalarMappable(norm=Normalize(min(distances), max(distances)), cmap='viridis_r'), ax=ax1)
-        distance_colorbar.set_label(r'Distance to Central (ckpc/h)')
+        if distances is not None:
+            distance_colorbar = fig.colorbar(cm.ScalarMappable(norm=Normalize(min(distances), max(distances)), cmap='viridis_r'), ax=ax1)
+            distance_colorbar.set_label(r'Distance to Central (ckpc/h)')
+
+    else:
+        for i in range(len(ell_array)):
+            if ell_array[i]['ell_gal_3'] is not None:
+                if is_primaries[i] == True:
+                    ax1.errorbar(
+                        ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                        np.log10(ell_array[i]['ell_gal_3']['intens']),
+                        yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
+                        color='black', alpha=0.8, fmt='s', capsize=3,
+                        capthick=1, elinewidth=1)
+
+                    ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='black')
+
+                else:
+                    ax1.errorbar(
+                        ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                        np.log10(ell_array[i]['ell_gal_3']['intens']),
+                        yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
+                        color='red', alpha=0.8, fmt='s', capsize=3,
+                        capthick=1, elinewidth=1)
+
+                    ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
+                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='red')
 
     return fig
 
