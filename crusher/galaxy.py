@@ -662,8 +662,9 @@ class GalaxyMap(object):
         else:
             return aper_fig
 
-    def show_prof(self, savefig=False, dpi=100, z_min=3.5, z_max=10.5,
-                  r_min=3.0, r_max=None, combine=False):
+     def show_prof(self, savefig=False, dpi=100, z_min=3.5, z_max=10.5,
+                  r_min=3.0, r_max=None, combine=False, insitu=False,
+                  exsitu=False):
         """Visualize the 1-D Ellipse profiles of all components.
 
         Parameters
@@ -701,7 +702,7 @@ class GalaxyMap(object):
         over_fig = visual.overplot_ellipse(ell_plot, zmin=z_min, zmax=z_max)
 
         # Making the 1-D profile figure
-        prof_fig = visual.plot_ell_prof(ell_plot, r_min=r_min, r_max=r_max)
+        prof_fig = visual.plot_ell_prof(ell_plot, r_min=r_min, r_max=r_max, insitu=insitu, exsitu=exsitu)
 
         # Save the figure in PNG format if necessary
         if savefig:
