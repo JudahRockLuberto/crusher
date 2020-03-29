@@ -105,6 +105,7 @@ class BeneMassAgeZMaps(object):
         # add useful values to array
         data_dict = dict()
         for i in range(len(self.hdf5_values)):
+            print(i)
             if i in useful_values:
                 data_dict[i] = list(self.data[i])
 
