@@ -608,8 +608,8 @@ class GalaxyMap(object):
         
         map_fig = visual.show_maps(
             self.maps, self.detect_gal, 
-            age='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
-            met='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
+            age_info='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
+            met_info='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
             figsize=figsize, cid=self.info['catsh_id'], logms=self.info['logms'])
 
         # Save the figure in PNG format if necessary
@@ -650,8 +650,8 @@ class GalaxyMap(object):
         # Generate the figure
         aper_fig = visual.show_aper(
             self.info, self.aper_sum, 
-            age='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
-            met='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
+            age_info='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
+            met_info='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
             figsize=figsize, rad_min=rad_min, rad_max=rad_max)
 
         # Save the figure in PNG format if necessary
