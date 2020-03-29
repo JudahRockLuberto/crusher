@@ -78,7 +78,7 @@ class GalaxyMap(object):
             os.mkdir(self.sum_dir)
 
         # list of attributes
-        self.hdf5_list = list(hdf5)
+        self.hdf5_values = hdf5.hdf5_values
             
         # Pixel scale in unit of kpc per pixel
         self.pix = hdf5.pix
