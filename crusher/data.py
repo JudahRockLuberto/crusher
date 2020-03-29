@@ -298,9 +298,9 @@ class BeneMassAgeZMaps(object):
                 print("# log(Z_exs/Z_sun): {:6.2f}".format(
                     np.log10(np.nanmedian(met_exs / Z_SUN))))
 
-           maps['met_ins'] = met_ins
-           maps['met_exs'] = met_exs
-           maps['met_gal'] = met_gal
+            maps['met_ins'] = met_ins
+            maps['met_exs'] = met_exs
+            maps['met_gal'] = met_gal
         else:
             print('map_star_metallicity_insitu and map_star_metallicity_exsitu not in file. Metallicity maps skipped.')
                 
