@@ -106,7 +106,7 @@ class BeneMassAgeZMaps(object):
         data_dict = dict()
         for i in range(len(self.hdf5_values)):
             if list(self.hdf5_values)[i] in useful_values:
-                data_dict[i] = list(self.data)[i]
+                data_dict[list(self.hdf5_values)[i]] = list(self.data[list(self.hdf5_values)[i]])
 
         return data_dict
 
