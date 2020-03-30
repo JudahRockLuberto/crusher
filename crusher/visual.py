@@ -844,22 +844,22 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
                         ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
                         np.log10(ell_array[i]['ell_gal_3']['intens']),
                         yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
-                        color='dimgrey', alpha=0.8, fmt='s', capsize=3,
+                        color='darkgrey', alpha=0.8, fmt='s', capsize=3,
                         capthick=1, elinewidth=1)
 
                     ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
-                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='darkgrey')
+                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='dimgrey')
 
                 else:
                     ax1.errorbar(
                         ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
                         np.log10(ell_array[i]['ell_gal_3']['intens']),
                         yerr=ell_array[i]['ell_gal_3']['sbp_err'], markersize=5,
-                        color='darkorange', alpha=0.8, fmt='s', capsize=3,
+                        color='darkgrey', alpha=0.8, fmt='s', capsize=3,
                         capthick=1, elinewidth=1)
 
                     ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
-                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='darkgrey')
+                        np.log10(ell_array[i]['ell_gal_3']['intens']), c='darkorange')
 
     return fig
 
