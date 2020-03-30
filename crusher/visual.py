@@ -806,7 +806,7 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
 
     ax1 = fig.add_axes([0.09, 0.09, 0.90, 0.90])
 
-    ax1.set_title(r'Satellite Profiles ($11.6 < \log\ (M_{\odot}) < 11.8$)', fontsize=28)
+    ax1.set_title(r'Satellite Profiles ($11.5 < \log\ (M_{\odot}) < 11.6$)', fontsize=28)
     ax1.set_ylabel(r'$\log\ (\mu_{\star}/[M_{\odot}\ \mathrm{kpc}^{-2}])$', fontsize=28)
     ax1.set_xlabel(r'$R/\mathrm{kpc}^{1/4}$', fontsize=28)
 
