@@ -773,7 +773,7 @@ def plot_ell_fourier(fourier, pix=1.0, r_min=6.0, r_max=190.0, show_both=False):
     return fig
 
 
-def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, r_max=190.0):
+def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, r_max=190.0, save_to=None):
     """Plot combined maps of all centals, satellites, all. If is_primaries == None,
     then plot color depending on distance to central. If is_primaries is given, 
     plot centrals and black and satellites as red
@@ -861,6 +861,9 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
                     ax = ax1.plot(ell_array[i]['ell_gal_3']['r_kpc'] ** 0.25,
                         np.log10(ell_array[i]['ell_gal_3']['intens']), c='darkorange')
 
+    if save_to is not None:
+        plt.savefig(save_to)
+                    
     return fig
 
 """
