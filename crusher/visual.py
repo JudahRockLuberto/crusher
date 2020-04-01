@@ -11,6 +11,7 @@ from matplotlib.gridspec import GridSpec
 from matplotlib.ticker import NullFormatter, FormatStrFormatter
 from matplotlib import rcParams
 from matplotlib.colors import Normalize
+import matplotlib.patches as mpatches
 
 from kungpao.display import display_single
 
@@ -837,6 +838,12 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
             distance_colorbar.set_label(r'Distance to Central (ckpc/h)')
 
     else:
+        # add legend to plot
+        centrals = mpatches.Patch(color='black', label='Centrals')
+        ax1.legend(handles=[centrals])
+        sats = mpatches.Patch(color='darkorange', label='Satellites')
+        ax1.legend(handles=[sats])
+        
         for i in range(len(ell_array)):
             if ell_array[i]['ell_gal_3'] is not None:
                 if is_primaries[i] == True:
