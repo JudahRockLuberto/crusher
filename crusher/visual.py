@@ -840,9 +840,8 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
     else:
         # add legend to plot
         centrals = mpatches.Patch(color='black', label='Centrals')
-        ax1.legend(handles=[centrals])
         sats = mpatches.Patch(color='darkorange', label='Satellites')
-        ax1.legend(handles=[sats])
+        ax1.legend(handles=[centrals, sats])
         
         for i in range(len(ell_array)):
             if ell_array[i]['ell_gal_3'] is not None:
