@@ -862,7 +862,7 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
                         np.log10(ell_array[i]['ell_gal_3']['intens']), c='darkorange')
 
     if save_to is not None:
-        plt.savefig(save_to)
+        plt.savefig(save_to, bbox_inches='tight')
                     
     return fig
 
