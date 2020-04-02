@@ -910,22 +910,22 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, sav
         color_list.append(i / 8)
         
     # converting the dictionaries into scatterplot available arrays
-    M100_one, M10_one = dict_convert(dict_1)
-    M100_two, M10_two = dict_convert(dict_2)
-    M100_three, M10_three = dict_convert(dict_3)
-    M100_four, M10_four = dict_convert(dict_4)
-    M100_five, M10_five = dict_convert(dict_5)
-    M100_six, M10_six = dict_convert(dict_6)
-    M100_seven, M10_seven = dict_convert(dict_7)
+    M100_one, M10_one, red_one = dict_convert(dict_1)
+    M100_two, M10_two, red_two = dict_convert(dict_2)
+    M100_three, M10_three, red_three = dict_convert(dict_3)
+    M100_four, M10_four, red_four = dict_convert(dict_4)
+    M100_five, M10_five, red_five = dict_convert(dict_5)
+    M100_six, M10_six, red_six = dict_convert(dict_6)
+    M100_seven, M10_seven, red_seven = dict_convert(dict_7)
 
     # now for the plotting itself
-    ax1.scatter(M100_one, M10_one, c = cm.viridis(color_list[0]), label = 'z = 0.33')
-    ax1.scatter(M100_two, M10_two, c = cm.viridis(color_list[1]), label = 'z = 0.40')
-    ax1.scatter(M100_three, M10_three, c = cm.viridis(color_list[2]), label = 'z = 0.50')
-    ax1.scatter(M100_four, M10_four, c = cm.viridis(color_list[3]), label = 'z = 0.59')
-    ax1.scatter(M100_five, M10_five, c = cm.viridis(color_list[4]), label = 'z = 0.67')
-    ax1.scatter(M100_six, M10_six, c = cm.viridis(color_list[5]), label = 'z = 0.72')
-    ax1.scatter(M100_seven, M10_seven, c = cm.viridis(color_list[6]), label = 'z = 0.84')
+    ax1.scatter(M100_one, M10_one, c = cm.viridis_r(color_list[0]), label = 'z = ' + red_one)
+    ax1.scatter(M100_two, M10_two, c = cm.viridis_r(color_list[1]), label = 'z = ' + red_two)
+    ax1.scatter(M100_three, M10_three, c = cm.viridis_r(color_list[2]), label = 'z = ' + red_three)
+    ax1.scatter(M100_four, M10_four, c = cm.viridis_r(color_list[3]), label = 'z = ' + red_four)
+    ax1.scatter(M100_five, M10_five, c = cm.viridis_r(color_list[4]), label = 'z = ' + red_five)
+    ax1.scatter(M100_six, M10_six, c = cm.viridis_r(color_list[5]), label = 'z = ' + red_six)
+    ax1.scatter(M100_seven, M10_seven, c = cm.viridis_r(color_list[6]), label = 'z = ' + red_seven)
 
     # create legends
     legend = ax1.legend(fontsize='xx-small')
@@ -948,5 +948,7 @@ def dict_convert(dictionary):
     for i in dictionary:
         y_array.append(dictionary[i][0])
         x_array.append(dictionary[i][1])
+        
+    redshift = dictionary[list(dictionary.keys())[0]][2]
 
-    return x_array, y_array
+    return x_array, y_array, redshift
