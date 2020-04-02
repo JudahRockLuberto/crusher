@@ -948,7 +948,9 @@ def dict_convert(dictionary):
     for i in dictionary:
         y_array.append(dictionary[i][0])
         x_array.append(dictionary[i][1])
-        
+    
+    print(dictionary.keys())
+    print(list(dictionary.keys())[0])
     redshift = dictionary[list(dictionary.keys())[0]][2]
 
     return x_array, y_array, redshift
