@@ -925,17 +925,17 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, dic
     M100_eight, M10_eight = dict_convert(dict_1)
 
     # now for the plotting itself
-    ax1.scatter(M100_one, M10_one, c = cm.viridis(color_list[0]), s = 3, label = 'z = 0.99')
-    ax1.scatter(M100_two, M10_two, c = cm.viridis(color_list[1]), s = 3, label = 'z = 0.84')
-    ax1.scatter(M100_three, M10_three, c = cm.viridis(color_list[2]), s = 3, label = 'z = 0.72')
-    ax1.scatter(M100_four, M10_four, c = cm.viridis(color_list[3]), s = 3, label = 'z = 0.67')
-    ax1.scatter(M100_five, M10_five, c = cm.viridis(color_list[4]), s = 3, label = 'z = 0.59')
-    ax1.scatter(M100_six, M10_six, c = cm.viridis(color_list[5]), s = 3, label = 'z = 0.50')
-    ax1.scatter(M100_seven, M10_seven, c = cm.viridis(color_list[6]), s = 3, label = 'z = 0.40')
-    ax1.scatter(M100_eight, M10_eight, c = cm.viridis(color_list[7]), s = 3, label = 'z = 0.33')
+    ax1.scatter(M100_one, M10_one, c = cm.viridis(color_list[0]), label = 'z = 0.99')
+    ax1.scatter(M100_two, M10_two, c = cm.viridis(color_list[1]), label = 'z = 0.84')
+    ax1.scatter(M100_three, M10_three, c = cm.viridis(color_list[2]), label = 'z = 0.72')
+    ax1.scatter(M100_four, M10_four, c = cm.viridis(color_list[3]), label = 'z = 0.67')
+    ax1.scatter(M100_five, M10_five, c = cm.viridis(color_list[4]), label = 'z = 0.59')
+    ax1.scatter(M100_six, M10_six, c = cm.viridis(color_list[5]), label = 'z = 0.50')
+    ax1.scatter(M100_seven, M10_seven, c = cm.viridis(color_list[6]), label = 'z = 0.40')
+    ax1.scatter(M100_eight, M10_eight, c = cm.viridis(color_list[7]), label = 'z = 0.33')
 
     # create legends
-    legend = ax1.legend()
+    # legend = ax1.legend()
 
     if save_to is not None:
         plt.savefig(save_to, bbox_inches='tight')
