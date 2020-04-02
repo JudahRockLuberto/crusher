@@ -916,13 +916,13 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, dic
 
     # converting the dictionaries into scatterplot available arrays
     M100_one, M10_one = dict_convert(dict_1)
-    M100_two, M10_two = dict_convert(dict_1)
-    M100_three, M10_three = dict_convert(dict_1)
-    M100_four, M10_four = dict_convert(dict_1)
-    M100_five, M10_five = dict_convert(dict_1)
-    M100_six, M10_six = dict_convert(dict_1)
-    M100_seven, M10_seven = dict_convert(dict_1)
-    M100_eight, M10_eight = dict_convert(dict_1)
+    M100_two, M10_two = dict_convert(dict_2)
+    M100_three, M10_three = dict_convert(dict_3)
+    M100_four, M10_four = dict_convert(dict_4)
+    M100_five, M10_five = dict_convert(dict_5)
+    M100_six, M10_six = dict_convert(dict_6)
+    M100_seven, M10_seven = dict_convert(dict_7)
+    M100_eight, M10_eight = dict_convert(dict_8)
 
     # now for the plotting itself
     ax1.scatter(M100_one, M10_one, c = cm.viridis(color_list[0]), label = 'z = 0.99')
