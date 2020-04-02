@@ -59,8 +59,11 @@ class BeneMassAgeZMaps(object):
         # pixel scale in kpc/pixel
         self.pix = self.get_pixel_scale()
         
-        # pixel scale for many -- will make it a try because not all files have it
-        self.sh_idx = list(self.data['tree_sh_idx'])
+        # pixel scale for many -- made it a try because not all files have it
+        try:
+            self.sh_idx = list(self.data['tree_sh_idx'])
+        except:
+            pass
 
         # label the dataset
         if label is not None:
