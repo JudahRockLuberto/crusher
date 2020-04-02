@@ -279,9 +279,6 @@ class BeneMassAgeZMaps(object):
             maps['age_ins'] = age_ins
             maps['age_exs'] = age_exs
             maps['age_gal'] = age_gal
-        else:
-            print('map_star_age_insitu and map_star_age_exsitu not in file. Stellar age maps skipped.')
-                                                                                   
 
         # Get the stellar metallicity map if there
         if 'map_star_metallicity_insitu_{}'.format(proj) in self.hdf5_values and 'map_star_metallicity_exsitu_{}'.format(proj) in self.hdf5_values:
