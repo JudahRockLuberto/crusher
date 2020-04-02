@@ -897,7 +897,7 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, sav
 
     ax1 = fig.add_axes([0.09, 0.09, 0.90, 0.90])
 
-    ax1.set_title(r'$M_{10} vs M_{100} (11.2 < \log\ (M_{\odot})$)', fontsize=28)
+    ax1.set_title(r'$M_{10}\, vs\, M_{100}\, (11.2 < \log\ M_{\odot}$)', fontsize=28)
     ax1.set_ylabel(r'$M_{10}$', fontsize=28)
     ax1.set_xlabel(r'$M_{100}$', fontsize=28)
 
