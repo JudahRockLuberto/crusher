@@ -919,13 +919,13 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, sav
     M100_seven, M10_seven, red_seven = dict_convert(dict_7)
 
     # now for the plotting itself
-    ax1.scatter(M100_one, M10_one, c = cm.viridis_r(color_list[0]), label = 'z = ' + red_one)
-    ax1.scatter(M100_two, M10_two, c = cm.viridis_r(color_list[1]), label = 'z = ' + red_two)
-    ax1.scatter(M100_three, M10_three, c = cm.viridis_r(color_list[2]), label = 'z = ' + red_three)
-    ax1.scatter(M100_four, M10_four, c = cm.viridis_r(color_list[3]), label = 'z = ' + red_four)
-    ax1.scatter(M100_five, M10_five, c = cm.viridis_r(color_list[4]), label = 'z = ' + red_five)
-    ax1.scatter(M100_six, M10_six, c = cm.viridis_r(color_list[5]), label = 'z = ' + red_six)
-    ax1.scatter(M100_seven, M10_seven, c = cm.viridis_r(color_list[6]), label = 'z = ' + red_seven)
+    ax1.scatter(M100_one, M10_one, c = cm.viridis_r(color_list[0]), label = 'z = ' + str(red_one))
+    ax1.scatter(M100_two, M10_two, c = cm.viridis_r(color_list[1]), label = 'z = ' + str(red_two))
+    ax1.scatter(M100_three, M10_three, c = cm.viridis_r(color_list[2]), label = 'z = ' + str(red_three))
+    ax1.scatter(M100_four, M10_four, c = cm.viridis_r(color_list[3]), label = 'z = ' + str(red_four))
+    ax1.scatter(M100_five, M10_five, c = cm.viridis_r(color_list[4]), label = 'z = ' + str(red_five))
+    ax1.scatter(M100_six, M10_six, c = cm.viridis_r(color_list[5]), label = 'z = ' + str(red_six))
+    ax1.scatter(M100_seven, M10_seven, c = cm.viridis_r(color_list[6]), label = 'z = ' + str(red_seven))
 
     # create legends
     legend = ax1.legend(fontsize='xx-small')
