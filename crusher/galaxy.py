@@ -397,8 +397,6 @@ class GalaxyMap(object):
                
                 aper_sum.add_column(Column(data=self.maper_ins, name='maper_ins'))
                 aper_sum.add_column(Column(data=self.maper_exs, name='maper_exs'))
-        else:
-            print('Data for map_star_rho_insitu and map_star_rho_exsitu is not in the file. Skipped.')
 
         # aperture age profiles if there and add to aper_sum table
         if 'map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_age_exsitu_{}'.format(self.proj) in self.hdf5_values:
@@ -421,8 +419,6 @@ class GalaxyMap(object):
                 aper_sum.add_column(Column(data=self.age_prof_exs['prof'], name='age_exs'))
                 aper_sum.add_column(Column(data=self.age_prof_exs['flag'], name='age_exs_flag'))
                 aper_sum.add_column(Column(data=self.age_prof_exs['mass'], name='mprof_exs'))
-        else:
-            print('map_star_age_insitu and map_star_age_insitu were not in file. Skipped.')
 
         # Aperture metallicity profiles if there and add to aper_sum table
         if 'map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_metallicity_exsitu_{}'.format(self.proj) in self.hdf5_values:
@@ -442,8 +438,6 @@ class GalaxyMap(object):
                 aper_sum.add_column(Column(data=self.met_prof_exs['prof_w'], name='met_exs_w'))
                 aper_sum.add_column(Column(data=self.met_prof_exs['prof'], name='met_exs'))
                 aper_sum.add_column(Column(data=self.met_prof_exs['flag'], name='met_exs_flag'))
-        else:
-            print('map_star_metallicity_insitu and map_star_metallicity_exsitu were not in file. Skipped.')
 
         setattr(self, 'aper_sum', aper_sum.as_array())
 
