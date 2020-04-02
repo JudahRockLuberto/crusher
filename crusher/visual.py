@@ -928,7 +928,7 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, sav
     ax1.scatter(M100_seven, M10_seven, c = cm.viridis(color_list[6]), label = 'z = 0.84')
 
     # create legends
-    # legend = ax1.legend()
+    legend = ax1.legend(fontsize='xx-small')
 
     if save_to is not None:
         plt.savefig(save_to, bbox_inches='tight')
