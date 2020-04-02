@@ -839,7 +839,7 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
 
     else:
         # add legend to plot
-        centrals = mpatches.Patch(color='black', label='Centrals')
+        centrals = mpatches.Patch(color='darkgrey', label='Centrals')
         sats = mpatches.Patch(color='darkorange', label='Satellites')
         ax1.legend(handles=[centrals, sats])
         
@@ -872,24 +872,23 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
                     
     return fig
 
-"""
-def plot_m10_vs_m100():
-    
-    Plot mass of r<10kpc vs r<100kpc
+def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, dict_8, save_to=None):
+    """
+    Plot mass of r<10kpc vs r<100kpc of many galaxies
 
     Parameters
     ----------
-    masses_1: dict
-        A dictionary that has the mass within 10 kpc and 100 kpc of one Z.
-    masses_2: dict, optional
-        A dictionary that has the mass within 10 kpc and 100 kpc of a different Z.
-    r_min : float, optional
-        Minimum radius to plot, in unit of kpc. Default: 3.0.
-    r_max : float, optional
-        Maximum radius to plot, in unit of kpc. Default: 190.
-    
+    dict_1 ... dict_8: each dictionary is a separate redshift where keys are some differentiator (like galaxy number)
+    and value is tuple of form (M10, M100, redshift)
 
-    # Setup the figure and axes
+    save_to: filename to save to in directory where run script
+
+    Notes:
+        Make sure each index of mass_array, redshift_array, galaxy_array aligns with each other. So mass_array[i]
+        corresponds to redshift_array[i] corresponds to galaxy_array[i]
+    """
+
+    # setup the figure and axes
     fig = plt.figure(figsize=(10, 10))
     fig.subplots_adjust(
         left=0.0, right=1.0, bottom=0.00, top=1.0,
@@ -898,20 +897,63 @@ def plot_m10_vs_m100():
 
     ax1 = fig.add_axes([0.09, 0.09, 0.90, 0.90])
 
-    ax1.set_title(r'$M_{10} vs M_{100} (11.6 < \log\ (M_{\odot}) < 11.8$)', fontsize=28)
+    ax1.set_title(r'$M_{10} vs M_{100} (11.2 < \log\ (M_{\odot})$)', fontsize=28)
     ax1.set_ylabel(r'$M_{10}$', fontsize=28)
     ax1.set_xlabel(r'$M_{100}$', fontsize=28)
 
     ax1.grid(linestyle='--', alpha=0.4, linewidth=2)
 
-    # Plotting
-    for i in range(len(masses_1)):
+    # making colors work for legends
+    # first find the redshift color dict, so know what color to make each point and make sure redshift_list is not a tuple
+    color_list = list()
+    for i in range(8):
+        # have to specify because cm.viridis(0) == cm.viridis(1)
+        if i != 8:
+            color_list.append(i / 8)
+        else:
+            color_list.append((i / 8) - 0.001)
 
 
+    # converting the dictionaries into scatterplot available arrays
+    M100_one, M10_one = dict_convert(dict_1)
+    M100_two, M10_two = dict_convert(dict_1)
+    M100_three, M10_three = dict_convert(dict_1)
+    M100_four, M10_four = dict_convert(dict_1)
+    M100_five, M10_five = dict_convert(dict_1)
+    M100_six, M10_six = dict_convert(dict_1)
+    M100_seven, M10_seven = dict_convert(dict_1)
+    M100_eight, M10_eight = dict_convert(dict_1)
 
-    ax1.legend(handles=[first_z])
+    # now for the plotting itself
+    ax1.scatter(M100_one, M10_one, c = cm.viridis(color_list[0]), s = 7, label = 'z = 0.99')
+    ax1.scatter(M100_two, M10_two, c = cm.viridis(color_list[1]), s = 7, label = 'z = 0.84')
+    ax1.scatter(M100_three, M10_three, cm.viridis(color_list[2]), s = 7, label = 'z = 0.72')
+    ax1.scatter(M100_four, M10_four, c = cm.viridis(color_list[3]), s = 7, label = 'z = 0.67')
+    ax1.scatter(M100_five, M10_five, c = cm.viridis(color_list[4]), s = 7, label = 'z = 0.59')
+    ax1.scatter(M100_six, M10_six, c = cm.viridis(color_list[5]), s = 7, label = 'z = 0.50')
+    ax1.scatter(M100_seven, M10_seven, c = cm.viridis(color_list[6]), s = 7, label = 'z = 0.40')
+    ax1.scatter(M100_eight, M10_eight, c = cm.viridis(color_list[7]), s = 7, label = 'z = 0.33')
 
-    if masses_2 is not None:
-        ax1.legent(handles=[second_z])
+    # create legends
+    legend = ax1.legend()
 
-"""
+    if save_to is not None:
+        plt.savefig(save_to, bbox_inches='tight')
+
+def dict_convert(dictionary):
+    """
+    Convert a dictionary to scatterplot available arrays for plot_m10_vs_m100()
+
+    Parameters
+    ----------
+    dict: dictionary with keys as galaxy number and value is tuple where first is M10 and second is M100
+
+    """
+
+    x_array = list()
+    y_array = list()
+    for i in dictionary:
+        y_array.append(dictionary[i][0])
+        x_array.append(dictionary[i][1])
+
+    return x_array, y_array
