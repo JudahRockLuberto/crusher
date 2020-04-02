@@ -907,13 +907,8 @@ def plot_m10_vs_m100(dict_1, dict_2, dict_3, dict_4, dict_5, dict_6, dict_7, dic
     # first find the redshift color dict, so know what color to make each point and make sure redshift_list is not a tuple
     color_list = list()
     for i in range(8):
-        # have to specify because cm.viridis(0) == cm.viridis(1)
-        if i != 8:
-            color_list.append(i / 8)
-        else:
-            color_list.append((i / 8) - 0.001)
-
-
+        color_list.append(i / 8)
+        
     # converting the dictionaries into scatterplot available arrays
     M100_one, M10_one = dict_convert(dict_1)
     M100_two, M10_two = dict_convert(dict_2)
