@@ -807,7 +807,6 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
 
     ax1 = fig.add_axes([0.09, 0.09, 0.90, 0.90])
 
-    ax1.set_title(r'Satellite Profiles ($11.2 < \log\ (M_{\odot})$)', fontsize=28)
     ax1.set_ylabel(r'$\log\ (\mu_{\star}/[M_{\odot}\ \mathrm{kpc}^{-2}])$', fontsize=28)
     ax1.set_xlabel(r'$R/\mathrm{kpc}^{1/4}$', fontsize=28)
 
@@ -819,6 +818,8 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
 
     # 1-D profiles
     if is_primaries is None:
+        ax1.set_title(r'Satellite Profiles ($11.2 < \log\ (M_{\odot})$)', fontsize=28)
+        
         for i in range(len(ell_array)):
             if ell_array[i]['ell_gal_3'] is not None:
                 ax1.errorbar(
@@ -838,6 +839,8 @@ def plot_combined_maps(ell_array, distances=None, is_primaries=None, r_min=3.0, 
             distance_colorbar.set_label(r'Distance to Central (ckpc/h)')
 
     else:
+        ax1.set_title(r'Satellite Profiles ($11.2 < \log\ (M_{\odot}) < 11.4$)', fontsize=28)
+        
         # add legend to plot
         centrals = mpatches.Patch(color='darkgrey', label='Centrals')
         sats = mpatches.Patch(color='darkorange', label='Satellites')
