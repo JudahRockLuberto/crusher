@@ -61,10 +61,10 @@ class BeneMassAgeZMaps(object):
         
         # check if age or metallity in file and warn
         if 'map_star_metallicity_insitu_xy' not in self.hdf5_values and 'map_star_metallicity_exsitu_xy' not in self.hdf5_values:
-            print('Warning: metallicity not in file. Functions will skip this aspect.')
+            print('Warning: Metallicity not in file. Functions will skip this aspect.')
             
         if 'map_star_age_insitu_xy' not in self.hdf5_values and 'map_star_age_exsitu_xy' not in self.hdf5_values:
-            print('Warning: age not in file. Functions will skip this aspect.')
+            print('Warning: Age not in file. Functions will skip this aspect.')
             
         # label the dataset
         if label is not None:
