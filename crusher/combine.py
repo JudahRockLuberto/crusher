@@ -8,11 +8,7 @@ from scipy.interpolate import interp1d
 
 # use two maps of after ell_summary() in crusher.galaxy as variables and return a combined map
 def combine(highres_map, lowres_map):
-  # first, get pixel scales
-  pix_high = highres_map.pix
-  pix_low = lowres_map.pix
-  
-  # now we want to interpolate the first and second maps
+  # first we want to interpolate the first and second maps
   r = np.linspace(0, 600 ** 0.25, 700 ** 0.25)
   
   interp_high = interp1d(highres_map['ell_gal_3']['r_kpc'] ** 0.25,
