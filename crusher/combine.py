@@ -26,8 +26,8 @@ def combine(highres_map, lowres_map):
   interp_low_map = interp_low(r)
   
   # split at 80kpc (want highres to be inner part of map and lowres to be outer part of map)
-  mask_high = (r <= 80 ** 0.25)
-  mask_low = (r > 80 ** 0.25)
+  mask_high = (r <= (80 ** 0.25))
+  mask_low = (r > (80 ** 0.25))
   
   interp_high_map = interp_high_map[mask_high]
   interp_low_map = interp_low_map[mask_low]
