@@ -13,12 +13,12 @@ def combine(highres_map, lowres_map):
   
   interp_high = interp1d(highres_map['ell_gal_3']['r_kpc'] ** 0.25,
                          np.log10(highres_map['ell_gal_3']['intens']),
-                         bounds_error=False, fill_value=np.nan,
+                         bounds_error=False,
                          kind='slinear')
   
   interp_low = interp1d(lowres_map['ell_gal_3']['r_kpc'] ** 0.25,
                          np.log10(lowres_map['ell_gal_3']['intens']),
-                         bounds_error=False, fill_value=np.nan,
+                         bounds_error=False,
                          kind='slinear')
   
   # finish interpolating
