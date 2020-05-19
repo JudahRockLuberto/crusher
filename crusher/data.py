@@ -66,6 +66,10 @@ class BeneMassAgeZMaps(object):
         if 'map_star_age_insitu_xy' not in self.hdf5_values and 'map_star_age_exsitu_xy' not in self.hdf5_values:
             print('Warning: Age not in file. Functions will skip this aspect.')
             
+        if 'map_star_sigma_insitu_xy' not in self.hdf5_values and 'map_star_sigma_exsitu_xy' not in self.hdf5_values:
+            print('Warning: Sigma not in file. Functions will skip this aspect.')
+    
+            
         # label the dataset
         if label is not None:
             self.label = label
@@ -107,7 +111,8 @@ class BeneMassAgeZMaps(object):
                          'map_star_age_insitu_xz', 'map_star_age_insitu_yz', 'map_star_age_exsitu_xy',
                          'map_star_age_exsitu_xz', 'map_star_age_exsitu_yz', 'map_star_metallicity_insitu_xy',
                          'map_star_metallicity_insitu_xz', 'map_star_metallicity_insitu_yz', 'map_star_metallicity_exsitu_xy',
-                         'map_star_metallicity_exsitu_xz', 'map_star_metallicity_exsitu_yz']
+                         'map_star_metallicity_exsitu_xz', 'map_star_metallicity_exsitu_yz', 'map_star_sigma_xy', 
+                         'map_star_sigma_insitu_xy', 'map_star_sigma_exsitu_xy']
         
         # add useful values to array
         data_dict = dict()
@@ -297,6 +302,18 @@ class BeneMassAgeZMaps(object):
             maps['met_ins'] = met_ins
             maps['met_exs'] = met_exs
             maps['met_gal'] = met_gal
+            
+        # Get the velocity dispersion map if there
+        if 'map_star_sigma_insitu_{}'.format(proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(proj) in self.hdf5_values:
+            sigma_ins = self.data['map_star_sigma_insitu_{}'.format(proj)][idx]
+            sigma_exs = self.data['map_star_sigma_exsitu_{}'.format(proj)][idx]
+            sigma_gal = (sigma_ins * sigma_ins + sigma_exs * sigma_exs) / (mass_ins + mass_exs)
+            sigma_ins[met_ins == 0.] = np.nan
+            sigma_exs[met_ins == 0.] = np.nan
+
+            maps['sigma_ins'] = sigma_ins
+            maps['sigma_exs'] = sigma_exs
+            maps['sigma_gal'] = sigma_gal
                 
         if maps_only:
             return maps
