@@ -211,7 +211,7 @@ class BeneMassAgeZMaps(object):
         return info_dict
 
     def get_maps(self, idx, proj, verbose=False, maps_only=False):
-        """Gather the stellar mass, age, metallicity map.
+        """Gather the stellar mass, age, metallicity, and velocity dispersion maps.
 
         Parameters
         ----------
