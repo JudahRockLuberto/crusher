@@ -313,7 +313,7 @@ class GalaxyMap(object):
         Parameters
         ----------
         data_type : str
-            Galaxy property to be used. `age` for stellar age, `met` for stellar metallicity.
+            Galaxy property to be used. `age` for stellar age, `met` for stellar metallicity, 'sigma' for velocity dispersion.
         map_type : str
             Type of the stellar mass map. Options ['gal'|'ins'|'exs']
         verbose : bool, optional
@@ -361,7 +361,7 @@ class GalaxyMap(object):
             return prof
 
     def aper_summary(self, gal_only=False, output=False):
-        """Get all the stellar mass, age, and metallicity profiles.
+        """Get all the stellar mass, age, metallicity, and velocity dispersion profiles.
 
         Parameters
         ----------
@@ -439,6 +439,25 @@ class GalaxyMap(object):
                 aper_sum.add_column(Column(data=self.met_prof_exs['prof'], name='met_exs'))
                 aper_sum.add_column(Column(data=self.met_prof_exs['flag'], name='met_exs_flag'))
 
+        # Aperture velocity dispersion profiles if there and add to aper_sum table
+        if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
+            self.aprof('sigma', 'gal)
+                       
+            aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_ins_w'))
+            aper_sum.add_column(Column(data=self.sigma_prof_gal['prof'], name='sigma_gal'))
+            aper_sum.add_column(Column(data=self.sigma_prof_gal['flag'], name='sigma_gal_flag'))
+                       
+           if not gal_only:
+                self.aprof('sigma', 'ins')
+                self.aprof('sigma', 'exs')
+                
+                aper_sum.add_column(Column(data=self.sigma_prof_ins['prof_w'], name='simga_ins_w'))
+                aper_sum.add_column(Column(data=self.sigma_prof_ins['prof'], name='sigma_ins'))
+                aper_sum.add_column(Column(data=self.sigma_prof_ins['flag'], name='sigma_ins_flag'))
+                aper_sum.add_column(Column(data=self.sigma_prof_exs['prof_w'], name='sigma_exs_w'))
+                aper_sum.add_column(Column(data=self.sigma_prof_exs['prof'], name='sigma_exs'))
+                aper_sum.add_column(Column(data=self.sigma_prof_exs['flag'], name='sigma_exs_flag'))
+          
         setattr(self, 'aper_sum', aper_sum.as_array())
 
         if output:
@@ -731,6 +750,47 @@ class GalaxyMap(object):
                     return
         else:
             return over_fig, prof_fig
+                       
+     def show_sigma(self, figsize=(8, 18), savefig=False, dpi=100, rad_min=5.5, rad_max=None):
+        """Visualize the stellar mass, age, and/or metallicity aperture profiles.
+        for all components. visual.sigma_plot changes profile depending on if have
+        age or metallicity or not.
+
+        Parameters
+        ----------
+        figsize : tuple, optional
+            Size of the 3x3 figure. Default: (15, 15)
+        savefig : bool, optional
+            Save a copy of the figure in PNG format. Default: False.
+        dpi : int, optional
+            DPI value for saving PNG figure. Default: 100.
+        rad_min : float, optional
+            Minimum radius to plot, in unit of kpc. Default: 5.5.
+        rad_max : float, optional
+            Maximum radius to plot, in unit of kpc. Default: None
+
+        """
+        # Make sure the aperture profiles results are available
+        if self.aper_sum is None:
+            self.aper_summary(gal_only=False)
+
+        # Maximum radii to plot
+        if rad_max is None:
+            rad_max = self.info['pix'] * self.info['img_w'] / 2.0
+
+        # Generate the figure
+        sigma_fig = visual.sigma_sum(
+            self.info, self.aper_sum, 
+            sigma_info = 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values,
+            figsize=figsize, rad_min=rad_min, rad_max=rad_max)
+
+        # Save the figure in PNG format if necessary
+        if savefig:
+            sigma_fig.savefig(
+                os.path.join(self.fig_dir, "{}_sigma.png".format(self.prefix)), dpi=dpi)
+            plt.close(sigma_fig)
+        else:
+            return sigma_fig
 
     def run_all(self, plot=False, output=False, save=True):
         """Run all the default analysis of a galaxy (and make plots).
