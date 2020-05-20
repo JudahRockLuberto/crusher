@@ -751,7 +751,7 @@ class GalaxyMap(object):
         else:
             return over_fig, prof_fig
                        
-     def show_sigma(self, figsize=(8, 18), savefig=False, dpi=100, rad_min=5.5, rad_max=None):
+    def show_sigma(self, figsize=(8, 18), savefig=False, dpi=100, rad_min=5.5, rad_max=None):
         """Visualize the stellar mass, age, and/or metallicity aperture profiles.
         for all components. visual.sigma_plot changes profile depending on if have
         age or metallicity or not.
