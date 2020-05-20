@@ -971,7 +971,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
         left=0.175, right=0.93, bottom=0.055, top=0.995,
         wspace=0.00, hspace=0.00)
     
-    ax1 = fig_prof.add_subplot(grid_prof[3])
+    ax1 = fig_prof.add_subplot(grid_prof[0])
     
     ax1.scatter(
         aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
