@@ -53,7 +53,7 @@ IMG_CMAP.set_bad(color='w')
 
 
 def show_maps(maps, aper, age_info=True, met_info=True, cid=None, logms=None, figsize=(15, 15)):
-    """Visualize the stellar mass, age, and metallicity maps.
+    """Visualize the stellar mass, age, metallicity, and velocity dispersion maps.
 
     Parameters
     ----------
@@ -81,7 +81,8 @@ def show_maps(maps, aper, age_info=True, met_info=True, cid=None, logms=None, fi
     # List of the maps need to be plot
     list_maps = ['mass_gal', 'mass_ins', 'mass_exs',
                  'age_gal', 'age_ins', 'age_exs',
-                 'met_gal', 'met_ins', 'met_exs']
+                 'met_gal', 'met_ins', 'met_exs',
+                 'sigma_gal', 'sigma_ins', 'sigma_exs']
 
     for ii, name in enumerate(list_maps):
         ax = fig_sum.add_subplot(grid_sum[ii])
@@ -957,3 +958,49 @@ def dict_convert(dictionary):
     redshift = dictionary[list(dictionary.keys())[0]][2]
 
     return x_array, y_array, redshift
+
+def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
+    """
+    Create scatterplot of sigma profiles  
+    """
+    
+    fig_prof = plt.figure(figsize=figsize, constrained_layout=False)
+    # add rows based on if age or met are True, or, 1 (why did 2+age+met)
+    grid_prof = fig_prof.add_gridspec(1, 1, wspace=0.0, hspace=0.0)
+    fig_prof.subplots_adjust(
+        left=0.175, right=0.93, bottom=0.055, top=0.995,
+        wspace=0.00, hspace=0.00)
+    
+    ax1 = fig_prof.add_subplot(grid_prof[3])
+    
+    ax1.scatter(
+        aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
+        c='darkgrey', marker='s', s=60, label='__no_label__')
+    """
+    ax1.scatter(
+        aper['rad_mid'] ** 0.25, aper['sigma_ins_w'],
+        c='orangered', marker='o', s=70, alpha=0.8, label=r'$\rm Weighted$')
+    ax1.scatter(
+        aper['rad_mid'] ** 0.25, aper['sigma_exs_w'],
+        c='steelblue', marker='h', s=80, alpha=0.8, label='__no_label__')
+    ax1.scatter(
+        aper['rad_mid'] ** 0.25, aper['sigma_ins'],
+        edgecolor='orangered', marker='o', s=80, alpha=0.8, label=r'$\rm Not\ Weighted$',
+        facecolor='none', linewidth=2)
+    ax1.scatter(
+        aper['rad_mid'] ** 0.25, aper['sigma_exs'],
+        edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
+        facecolor='none', linewidth=2)
+        """
+
+    ax1.grid(linestyle='--', alpha=0.5)
+    ax1.legend(fontsize=20, loc='best')
+
+    _ = ax1.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
+    # ylim: 0 - 220 km/s
+    _ = ax1.set_ylim(0, 220) 
+
+    _ = ax3.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
+    _ = ax3.set_ylabel(r'$[\rm km/s]$', fontsize=28)
+    
+    return fig_prof
