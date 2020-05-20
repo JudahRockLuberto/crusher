@@ -780,8 +780,7 @@ class GalaxyMap(object):
 
         # Generate the figure
         sigma_fig = visual.sigma_plot(
-            self.info, self.aper_sum, 
-            sigma_info = 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values,
+            self.info, self.aper_sum,
             figsize=figsize, rad_min=rad_min, rad_max=rad_max)
 
         # Save the figure in PNG format if necessary
