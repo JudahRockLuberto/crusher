@@ -447,7 +447,7 @@ class GalaxyMap(object):
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof'], name='sigma_gal'))
             aper_sum.add_column(Column(data=self.sigma_prof_gal['flag'], name='sigma_gal_flag'))
                        
-           if not gal_only:
+            if not gal_only:
                 self.aprof('sigma', 'ins')
                 self.aprof('sigma', 'exs')
                 
