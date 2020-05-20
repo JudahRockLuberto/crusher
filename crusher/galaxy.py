@@ -443,7 +443,7 @@ class GalaxyMap(object):
         if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
             self.aprof('sigma', 'gal')
                        
-            aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_ins_w'))
+            aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_gal_w'))
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof'], name='sigma_gal'))
             aper_sum.add_column(Column(data=self.sigma_prof_gal['flag'], name='sigma_gal_flag'))
                        
