@@ -1000,7 +1000,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     # ylim: 0 - 220 km/s
     _ = ax1.set_ylim(0, 220) 
 
-    _ = ax3.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
-    _ = ax3.set_ylabel(r'$[\rm km/s]$', fontsize=28)
+    _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
+    _ = ax1.set_ylabel(r'$[\rm km/s]$', fontsize=28)
     
     return fig_prof
