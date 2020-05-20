@@ -779,7 +779,7 @@ class GalaxyMap(object):
             rad_max = self.info['pix'] * self.info['img_w'] / 2.0
 
         # Generate the figure
-        sigma_fig = visual.sigma_sum(
+        sigma_fig = visual.show_sigma(
             self.info, self.aper_sum, 
             sigma_info = 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values,
             figsize=figsize, rad_min=rad_min, rad_max=rad_max)
