@@ -964,7 +964,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     Create scatterplot of sigma profiles  
     """
     
-    fig_prof = plt.figure()
+    fig = plt.figure()
     
     fig.subplots_adjust(
         left=0.0, right=1.0, bottom=0.00, top=1.0,
@@ -1004,4 +1004,4 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
         facecolor='none', linewidth=2)
         """
     
-    return fig_prof
+    return fig
