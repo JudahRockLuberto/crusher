@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Visualization of the results."""
+"""Visualization of the results.""" 
 
 import numpy as np
 
@@ -1002,7 +1002,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
 
     _ = ax1.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
     # ylim: 0 - 220 km/s
-    _ = ax1.set_ylim(0, 220) 
+    # _ = ax1.set_ylim(0, 220) 
 
     _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
     _ = ax1.set_ylabel(r'$[\rm km/s]$', fontsize=28)
