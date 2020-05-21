@@ -978,7 +978,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     # _ = ax1.set_ylim(0, 220) 
 
     _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
-    _ = ax1.set_ylabel(r'$log_{10}V_{disp}[\rm km/s]$', fontsize=28)
+    _ = ax1.set_ylabel(r'$V_{disp}[\rm km/s]$', fontsize=28)
     
     ax1.scatter(
         aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
