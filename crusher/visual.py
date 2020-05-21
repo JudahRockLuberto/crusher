@@ -967,15 +967,15 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     fig_prof = plt.figure(figsize=figsize, constrained_layout=False)
     # add rows based on if age or met are True, or, 1 (why did 2+age+met)
     grid_prof = fig_prof.add_gridspec(1, 1, wspace=0.0, hspace=0.0)
-    fig_prof.subplots_adjust(
-        left=0.175, right=0.93, bottom=0.055, top=0.995,
-        wspace=0.00, hspace=0.00)
+    # fig_prof.subplots_adjust(
+    #    left=0.175, right=0.93, bottom=0.055, top=0.995,
+    #    wspace=0.00, hspace=0.00)
     
     ax1 = fig_prof.add_subplot(grid_prof[0])
     
     ax1.scatter(
         aper['rad_mid'] ** 0.25, np.log10(aper['sigma_gal_w']),
-        c='darkgrey', marker='s', s=60, label='__no_label__')
+        c='black', s=60, label='__no_label__')
     
     print('gal', aper['sigma_gal_w'])
     print('rad', aper['rad_mid'])
