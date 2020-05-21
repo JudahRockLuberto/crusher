@@ -964,7 +964,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     Create scatterplot of sigma profiles  
     """
     
-    fig_prof = plt.figure(figsize=figsize, constrained_layout=False)
+    fig_prof = plt.figure()
     # add rows based on if age or met are True, or, 1 (why did 2+age+met)
     grid_prof = fig_prof.add_gridspec(1, 1, wspace=0.0, hspace=0.0)
     # fig_prof.subplots_adjust(
@@ -974,7 +974,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     ax1 = fig_prof.add_subplot(grid_prof[0])
     
     ax1.scatter(
-        aper['rad_mid'] ** 0.25, np.log10(aper['sigma_gal_w']),
+        aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
         c='black', s=60, label='__no_label__')
     
     print('gal', aper['sigma_gal_w'])
