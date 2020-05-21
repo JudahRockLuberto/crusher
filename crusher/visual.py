@@ -965,13 +965,20 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     """
     
     fig_prof = plt.figure()
-    # add rows based on if age or met are True, or, 1 (why did 2+age+met)
-    grid_prof = fig_prof.add_gridspec(1, 1, wspace=0.0, hspace=0.0)
-    # fig_prof.subplots_adjust(
-    #    left=0.175, right=0.93, bottom=0.055, top=0.995,
-    #    wspace=0.00, hspace=0.00)
     
-    ax1 = fig_prof.add_subplot(grid_prof[0])
+    fig.subplots_adjust(
+        left=0.0, right=1.0, bottom=0.00, top=1.0,
+        wspace=0.00, hspace=0.00)   
+
+    ax1 = fig.add_axes([0.09, 0.09, 0.90, 0.90])
+    ax1.grid(linestyle='--', alpha=0.4, linewidth=2)
+
+    _ = ax1.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
+    # ylim: 0 - 220 km/s
+    # _ = ax1.set_ylim(0, 220) 
+
+    _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
+    _ = ax1.set_ylabel(r'$log_{10}V_{disp}[\rm km/s]$', fontsize=28)
     
     ax1.scatter(
         aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
@@ -996,15 +1003,5 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
         edgecolor='steelblue', marker='h', s=90, alpha=0.8, label='__no_label__',
         facecolor='none', linewidth=2)
         """
-
-    ax1.grid(linestyle='--', alpha=0.5)
-    ax1.legend(fontsize=20, loc='best')
-
-    _ = ax1.set_xlim(rad_min ** 0.25, rad_max ** 0.25)
-    # ylim: 0 - 220 km/s
-    # _ = ax1.set_ylim(0, 220) 
-
-    _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
-    _ = ax1.set_ylabel(r'$log_{10}V_{disp}[\rm km/s]$', fontsize=28)
     
     return fig_prof
