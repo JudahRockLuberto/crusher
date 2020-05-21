@@ -974,7 +974,7 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     ax1 = fig_prof.add_subplot(grid_prof[0])
     
     ax1.scatter(
-        aper['rad_mid'] ** 0.25, aper['sigma_gal_w'],
+        aper['rad_mid'] ** 0.25, np.log10(aper['sigma_gal_w']),
         c='darkgrey', marker='s', s=60, label='__no_label__')
     
     print('gal', aper['sigma_gal_w'])
@@ -1005,6 +1005,6 @@ def sigma_plot(info, aper, figsize=(8,18), rad_min=5.5, rad_max=170.0):
     # _ = ax1.set_ylim(0, 220) 
 
     _ = ax1.set_xlabel(r'$[R/{\rm kpc}]^{1/4}$', fontsize=28)
-    _ = ax1.set_ylabel(r'$[\rm km/s]$', fontsize=28)
+    _ = ax1.set_ylabel(r'$log_{10}V_{disp}[\rm km/s]$', fontsize=28)
     
     return fig_prof
