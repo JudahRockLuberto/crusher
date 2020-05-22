@@ -784,21 +784,6 @@ class GalaxyMap(object):
         # Maximum radii to plot
         if rad_max is None:
             rad_max = self.info['pix'] * self.info['img_w'] / 2.0
-
-                    # Make sure the aperture profiles results are available
-        if self.aper_sum is None:
-            self.aper_summary(gal_only=False)
-
-        # Maximum radii to plot
-        if rad_max is None:
-            rad_max = self.info['pix'] * self.info['img_w'] / 2.0
-
-        # Generate the figure
-        aper_fig = visual.show_aper(
-            self.info, self.aper_sum, 
-            age_info='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
-            met_info='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
-            figsize=figsize, rad_min=rad_min, rad_max=rad_max)
             
         # Generate the figure
         sigma_fig = visual.sigma_plot(
