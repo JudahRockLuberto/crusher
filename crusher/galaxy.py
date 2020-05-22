@@ -446,8 +446,9 @@ class GalaxyMap(object):
 
         # Aperture velocity dispersion profiles if there and add to aper_sum table
         if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
-            print('here!')
             self.aprof('sigma', 'gal')
+            print('w!', self.sigma_prof_gal['prof_w'])
+            print('nw!', self.sigma_prof_gal['prof']
                        
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_gal_w'))
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof'], name='sigma_gal'))
@@ -784,9 +785,24 @@ class GalaxyMap(object):
         if rad_max is None:
             rad_max = self.info['pix'] * self.info['img_w'] / 2.0
 
+                    # Make sure the aperture profiles results are available
+        if self.aper_sum is None:
+            self.aper_summary(gal_only=False)
+
+        # Maximum radii to plot
+        if rad_max is None:
+            rad_max = self.info['pix'] * self.info['img_w'] / 2.0
+
+        # Generate the figure
+        aper_fig = visual.show_aper(
+            self.info, self.aper_sum, 
+            age_info='map_star_age_insitu_{}'.format(self.proj) in self.hdf5_values,
+            met_info='map_star_metallicity_insitu_{}'.format(self.proj) in self.hdf5_values,
+            figsize=figsize, rad_min=rad_min, rad_max=rad_max)
+            
         # Generate the figure
         sigma_fig = visual.sigma_plot(
-            self.info, self.aper_sum,
+            self.info, self.aper_sum
             figsize=figsize, rad_min=rad_min, rad_max=rad_max)
 
         # Save the figure in PNG format if necessary
