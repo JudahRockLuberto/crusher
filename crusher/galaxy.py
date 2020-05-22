@@ -350,7 +350,7 @@ class GalaxyMap(object):
                 detect = self.detect(map_type, output=True, **detect_kwargs)
 
         mask = (self.maps['mass_gal'] < 1.).astype(np.uint8)
-
+        print('here!', map_type, data_type)
         prof = profile.mass_weighted_prof(
             self.maps['{}_{}'.format(data_type, map_type)],
             self.maps['mass_{}'.format(map_type)], detect, self.rad_inn, self.rad_out,
@@ -447,8 +447,6 @@ class GalaxyMap(object):
         # Aperture velocity dispersion profiles if there and add to aper_sum table
         if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
             self.aprof('sigma', 'gal')
-            print('w!', self.sigma_prof_gal['prof_w'])
-            print('nw!', self.sigma_prof_gal['prof'])
                        
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_gal_w'))
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof'], name='sigma_gal'))
