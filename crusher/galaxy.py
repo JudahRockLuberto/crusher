@@ -132,6 +132,11 @@ class GalaxyMap(object):
         self.met_prof_gal = None
         self.met_prof_ins = None
         self.met_prof_exs = None
+        
+        # Sigma profiles
+        self.sigma_prof_gal = None
+        self.sigma_prof_ins = None
+        self.sigma_prof_exs = None
 
         # Ellipse results for the whole galaxy
         self.ell_shape_gal = None
@@ -441,6 +446,7 @@ class GalaxyMap(object):
 
         # Aperture velocity dispersion profiles if there and add to aper_sum table
         if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
+            print('here!')
             self.aprof('sigma', 'gal')
                        
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_gal_w'))
@@ -752,8 +758,8 @@ class GalaxyMap(object):
             return over_fig, prof_fig
                        
     def show_sigma(self, figsize=(8, 18), savefig=False, dpi=100, rad_min=5.5, rad_max=None):
-        """Visualize the stellar mass, age, and/or metallicity aperture profiles.
-        for all components. visual.sigma_plot changes profile depending on if have
+        """Visualize the sigma profiles for all components. 
+        visual.sigma_plot changes profile depending on if have
         age or metallicity or not.
 
         Parameters
