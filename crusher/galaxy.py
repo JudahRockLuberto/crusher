@@ -456,7 +456,7 @@ class GalaxyMap(object):
                 self.aprof('sigma', 'ins')
                 self.aprof('sigma', 'exs')
                 
-                aper_sum.add_column(Column(data=self.sigma_prof_ins['prof_w'], name='simga_ins_w'))
+                aper_sum.add_column(Column(data=self.sigma_prof_ins['prof_w'], name='sigma_ins_w'))
                 aper_sum.add_column(Column(data=self.sigma_prof_ins['prof'], name='sigma_ins'))
                 aper_sum.add_column(Column(data=self.sigma_prof_ins['flag'], name='sigma_ins_flag'))
                 aper_sum.add_column(Column(data=self.sigma_prof_exs['prof_w'], name='sigma_exs_w'))
