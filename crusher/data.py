@@ -307,7 +307,7 @@ class BeneMassAgeZMaps(object):
         if 'map_star_sigma_insitu_{}'.format(proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(proj) in self.hdf5_values:
             sigma_ins = self.data['map_star_sigma_insitu_{}'.format(proj)][idx]
             sigma_exs = self.data['map_star_sigma_exsitu_{}'.format(proj)][idx]
-            sigma_gal = (sigma_ins * sigma_ins + sigma_exs * sigma_exs) / (mass_ins + mass_exs)
+            sigma_gal = (sigma_ins * mass_ins + sigma_exs * mass_exs) / (mass_ins + mass_exs)
             sigma_ins[met_ins == 0.] = np.nan
             sigma_exs[met_ins == 0.] = np.nan
 
