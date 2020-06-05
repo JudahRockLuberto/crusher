@@ -445,7 +445,7 @@ class GalaxyMap(object):
                 aper_sum.add_column(Column(data=self.met_prof_exs['flag'], name='met_exs_flag'))
 
         # Aperture velocity dispersion profiles if there and add to aper_sum table
-        if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values:
+        if 'map_star_sigma_insitu_{}'.format(self.proj) in self.hdf5_values and 'map_star_sigma_exsitu_{}'.format(self.proj) in self.hdf5_values or 'map_star_sigma_{}'.format(self.proj) in self.hdf5_values:
             self.aprof('sigma', 'gal')
                        
             aper_sum.add_column(Column(data=self.sigma_prof_gal['prof_w'], name='sigma_gal_w'))
