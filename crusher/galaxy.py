@@ -351,10 +351,6 @@ class GalaxyMap(object):
 
         mask = (self.maps['mass_gal'] < 1.).astype(np.uint8)
         
-        # bandaid fix because sigma data is map_star_sigma_xy now. so add to map_type
-        if 'sigma' in map_type:
-            map_type += '_xy'
-        
         prof = profile.mass_weighted_prof(
             self.maps['{}_{}'.format(data_type, map_type)],
             self.maps['mass_{}'.format(map_type)], detect, self.rad_inn, self.rad_out,
