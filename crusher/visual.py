@@ -78,8 +78,6 @@ def show_maps(maps, aper, age_info=True, met_info=True, cid=None, logms=None, fi
         left=0.005, right=0.995, bottom=0.005, top=0.995,
         wspace=0.00, hspace=0.00)
 
-    print(age_info, met_info)
-    
     # List of the maps need to be plot
     list_maps = ['mass_gal', 'mass_ins', 'mass_exs']
     
