@@ -81,9 +81,13 @@ def show_maps(maps, aper, age_info=True, met_info=True, cid=None, logms=None, fi
     print(age_info, met_info)
     
     # List of the maps need to be plot
-    list_maps = ['mass_gal', 'mass_ins', 'mass_exs',
-                 'age_gal', 'age_ins', 'age_exs',
-                 'met_gal', 'met_ins', 'met_exs']
+    list_maps = ['mass_gal', 'mass_ins', 'mass_exs']
+    
+    if age_info == True:
+        list_maps += ['age_gal', 'age_ins', 'age_exs']
+        
+    if met_info == True:
+        list_maps += ['met_gal', 'met_ins', 'met_exs']
 
     for ii, name in enumerate(list_maps):
         ax = fig_sum.add_subplot(grid_sum[ii])
