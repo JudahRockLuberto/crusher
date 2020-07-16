@@ -32,7 +32,7 @@ class BeneMassAgeZMaps(object):
 
     """
 
-    def __init__(self, hdf5_file, label=None):
+    def __init__(self, hdf5_file, label=None, warnings=True):
         # read in the file itself
         self.hdf5_file = hdf5_file
         directory, file_name = os.path.split(hdf5_file)
@@ -60,14 +60,15 @@ class BeneMassAgeZMaps(object):
         self.pix = self.get_pixel_scale()
         
         # check if age or metallity in file and warn
-        if 'map_star_metallicity_insitu_xy' not in self.hdf5_values and 'map_star_metallicity_exsitu_xy' not in self.hdf5_values:
-            print('Warning: Metallicity not in file. Functions will skip this aspect.')
-            
-        if 'map_star_age_insitu_xy' not in self.hdf5_values and 'map_star_age_exsitu_xy' not in self.hdf5_values:
-            print('Warning: Age not in file. Functions will skip this aspect.')
-            
-        if 'map_star_sigma_insitu_xy' not in self.hdf5_values and 'map_star_sigma_exsitu_xy' not in self.hdf5_values:
-            print('Warning: Sigma not in file. Functions will skip this aspect.')
+        if warnings == True:
+            if 'map_star_metallicity_insitu_xy' not in self.hdf5_values and 'map_star_metallicity_exsitu_xy' not in self.hdf5_values:
+                print('Warning: Metallicity not in file. Functions will skip this aspect.')
+
+            if 'map_star_age_insitu_xy' not in self.hdf5_values and 'map_star_age_exsitu_xy' not in self.hdf5_values:
+                print('Warning: Age not in file. Functions will skip this aspect.')
+
+            if 'map_star_sigma_insitu_xy' not in self.hdf5_values and 'map_star_sigma_exsitu_xy' not in self.hdf5_values:
+                print('Warning: Sigma not in file. Functions will skip this aspect.')
     
             
         # label the dataset
